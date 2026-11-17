@@ -2,10 +2,6 @@ package questao08;
 
 import java.util.Scanner;
 
-/**
- * Demonstra a utilização da classe ConversorTemperatura, usando um switch
- * para identificar a conversão solicitada pelo usuário.
- */
 public class TesteConversorTemperatura {
 
     public static void main(String[] args) {

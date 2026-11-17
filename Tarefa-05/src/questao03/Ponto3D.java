@@ -1,12 +1,5 @@
 package questao03;
 
-/**
- * Representa um ponto no espaço tridimensional (x, y, z).
- *
- * Versão final da questão 3: os métodos estão com o modificador public, que
- * foi o único que compilou e executou em todos os cenários testados
- * (ver Respostas.txt).
- */
 public class Ponto3D {
 
     private double x;
@@ -47,14 +40,12 @@ public class Ponto3D {
         this.z = z;
     }
 
-    /** Desloca o ponto somando os valores informados às coordenadas. */
     public void mover(double dx, double dy, double dz) {
         x += dx;
         y += dy;
         z += dz;
     }
 
-    /** Calcula a distância entre este ponto e outro ponto. */
     public double distancia(Ponto3D outro) {
         double dx = x - outro.x;
         double dy = y - outro.y;

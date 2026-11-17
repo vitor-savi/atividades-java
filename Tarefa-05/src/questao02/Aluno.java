@@ -1,8 +1,5 @@
 package questao02;
 
-/**
- * Representa um aluno com seus dados e as disciplinas em que está matriculado.
- */
 public class Aluno {
 
     private String nome;
@@ -14,17 +11,6 @@ public class Aluno {
     private String[] disciplinasMatriculadas;
     private int quantidadeDisciplinas;
 
-    /**
-     * Cria um aluno.
-     *
-     * @param nome                              nome do aluno
-     * @param matricula                         matrícula do aluno
-     * @param curso                             curso do aluno
-     * @param periodo                           período em que o aluno está
-     * @param idade                             idade do aluno
-     * @param quantidadeDisciplinasPermitidadas quantidade de disciplinas em que o
-     *                                          aluno pode se matricular (tamanho do array)
-     */
     public Aluno(String nome, String matricula, String curso, int periodo, int idade,
             int quantidadeDisciplinasPermitidadas) {
         this.nome = nome;
@@ -36,20 +22,11 @@ public class Aluno {
         this.quantidadeDisciplinas = 0;
     }
 
-    /**
-     * Inclui uma disciplina no array de disciplinas matriculadas.
-     *
-     * @param disciplina nome da disciplina
-     * @return mensagem informando o resultado da matrícula
-     */
     public String fazMatricula(String disciplina) {
         if (disciplinasMatriculadas.length == 0) {
             return "Este aluno não pode ser matriculado em nenhuma disciplina, por favor, fale com a secretaria.";
         }
-        if (estaMatriculado(disciplina)) {
-            return "Aluno já está matriculado na disciplina " + disciplina + ".";
-        }
-        if (quantidadeDisciplinas >= disciplinasMatriculadas.length) {
+        if (quantidadeDisciplinas == disciplinasMatriculadas.length) {
             return "Quantidade de disciplinas excedida. O limite de disciplinas para este aluno é de "
                     + disciplinasMatriculadas.length + " disciplina(s). Se desejar, cancele a matrícula "
                     + "de uma das disciplinas e faça a nova matrícula.";
@@ -59,34 +36,23 @@ public class Aluno {
         return "Matrícula na disciplina \"" + disciplina + "\" executada.";
     }
 
-    /**
-     * Exclui uma disciplina do array de disciplinas matriculadas.
-     *
-     * @param disciplina nome da disciplina
-     * @return mensagem informando o resultado do cancelamento
-     */
     public String cancelarMatricula(String disciplina) {
-        int posicao = buscarDisciplina(disciplina);
-        if (posicao == -1) {
-            return "Aluno não está matriculado na disciplina " + disciplina
-                    + ", portanto não é possível cancelar esta matrícula.";
+        for (int i = 0; i < quantidadeDisciplinas; i++) {
+            if (disciplinasMatriculadas[i].equals(disciplina)) {
+                // puxa as disciplinas seguintes uma posição para trás
+                for (int j = i; j < quantidadeDisciplinas - 1; j++) {
+                    disciplinasMatriculadas[j] = disciplinasMatriculadas[j + 1];
+                }
+                quantidadeDisciplinas--;
+                disciplinasMatriculadas[quantidadeDisciplinas] = null;
+                return "Cancelamento da matrícula da disciplina " + disciplina + " executado com sucesso.";
+            }
         }
-        // Desloca as disciplinas seguintes uma posição para a esquerda
-        for (int i = posicao; i < quantidadeDisciplinas - 1; i++) {
-            disciplinasMatriculadas[i] = disciplinasMatriculadas[i + 1];
-        }
-        quantidadeDisciplinas--;
-        disciplinasMatriculadas[quantidadeDisciplinas] = null;
-        return "Cancelamento da matrícula da disciplina " + disciplina + " executado com sucesso.";
+        return "Aluno não está matriculado na disciplina " + disciplina
+                + ", portanto não é possível cancelar esta matrícula.";
     }
 
-    /**
-     * Retorna os dados do aluno e as disciplinas matriculadas de forma legível.
-     *
-     * @return texto com os dados do aluno
-     */
     public String imprime() {
-        String linha = "-----------------------------------------------------------------\n";
         String disciplinas = "";
         for (int i = 0; i < quantidadeDisciplinas; i++) {
             if (i > 0) {
@@ -94,43 +60,21 @@ public class Aluno {
             }
             disciplinas += disciplinasMatriculadas[i];
         }
-        return linha
+        return "-----------------------------------------------------------------\n"
                 + "Nome do Aluno: " + nome + "\n"
                 + "Matricula: " + matricula + "\n"
                 + "Curso: " + curso + "\n"
                 + "Periodo: " + periodo + "\n"
                 + "Idade: " + idade + "\n"
-                + "Endereco: " + (endereco == null ? "" : endereco) + "\n"
+                + "Endereco: " + endereco + "\n"
                 + "Disciplinas Matriculadas: " + disciplinas + "\n"
-                + linha;
+                + "-----------------------------------------------------------------\n";
     }
 
-    /**
-     * Redimensiona o array de disciplinas, mantendo as disciplinas já matriculadas
-     * que couberem no novo tamanho.
-     *
-     * @param quantidadeDisciplinasPermitidadas nova quantidade de disciplinas permitidas
-     */
-    public void setQuantidadeDisciplinasPermitidas(int quantidadeDisciplinasPermitidadas) {
-        String[] novoArray = new String[quantidadeDisciplinasPermitidadas];
-        quantidadeDisciplinas = Math.min(quantidadeDisciplinas, quantidadeDisciplinasPermitidadas);
-        for (int i = 0; i < quantidadeDisciplinas; i++) {
-            novoArray[i] = disciplinasMatriculadas[i];
-        }
-        disciplinasMatriculadas = novoArray;
-    }
-
-    public boolean estaMatriculado(String disciplina) {
-        return buscarDisciplina(disciplina) != -1;
-    }
-
-    private int buscarDisciplina(String disciplina) {
-        for (int i = 0; i < quantidadeDisciplinas; i++) {
-            if (disciplinasMatriculadas[i].equalsIgnoreCase(disciplina)) {
-                return i;
-            }
-        }
-        return -1;
+    // usado na primeira matrícula para definir o tamanho do array de disciplinas
+    public void setQuantidadeDisciplinasPermitidas(int quantidade) {
+        disciplinasMatriculadas = new String[quantidade];
+        quantidadeDisciplinas = 0;
     }
 
     public String getNome() {
@@ -182,18 +126,10 @@ public class Aluno {
     }
 
     public String[] getDisciplinasMatriculadas() {
-        String[] copia = new String[quantidadeDisciplinas];
-        for (int i = 0; i < quantidadeDisciplinas; i++) {
-            copia[i] = disciplinasMatriculadas[i];
-        }
-        return copia;
+        return disciplinasMatriculadas;
     }
 
     public int getQuantidadeDisciplinas() {
         return quantidadeDisciplinas;
-    }
-
-    public int getQuantidadeDisciplinasPermitidas() {
-        return disciplinasMatriculadas.length;
     }
 }

@@ -1,16 +1,7 @@
 package questao08;
 
-/**
- * Classe com métodos estáticos para converter temperaturas entre as escalas
- * Celsius, Fahrenheit e Kelvin.
- *
- * Relações utilizadas: F = 9*C/5 + 32 e K = C + 273
- */
+// F = 9*C/5 + 32 e K = C + 273
 public class ConversorTemperatura {
-
-    /** Construtor privado: a classe possui apenas métodos estáticos. */
-    private ConversorTemperatura() {
-    }
 
     public static double celsiusParaFahrenheit(double celsius) {
         return 9 * celsius / 5 + 32;
@@ -25,7 +16,7 @@ public class ConversorTemperatura {
     }
 
     public static double fahrenheitParaKelvin(double fahrenheit) {
-        return celsiusParaKelvin(fahrenheitParaCelsius(fahrenheit));
+        return fahrenheitParaCelsius(fahrenheit) + 273;
     }
 
     public static double kelvinParaCelsius(double kelvin) {
@@ -33,6 +24,6 @@ public class ConversorTemperatura {
     }
 
     public static double kelvinParaFahrenheit(double kelvin) {
-        return celsiusParaFahrenheit(kelvinParaCelsius(kelvin));
+        return celsiusParaFahrenheit(kelvin - 273);
     }
 }

@@ -1,8 +1,5 @@
 package questao03;
 
-/**
- * Classe de teste que utiliza os métodos de Ponto3D a partir de outra classe.
- */
 public class TestePonto3D {
 
     public static void main(String[] args) {
