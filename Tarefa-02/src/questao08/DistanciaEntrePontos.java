@@ -2,11 +2,7 @@ package questao08;
 
 import java.util.Scanner;
 
-/**
- * Questão 8 - Lê dois pontos (x, y) de um plano e informa a distância entre eles.
- *
- * Fórmula: d = raiz((x2 - x1)² + (y2 - y1)²)
- */
+// Questão 8 - Distância entre dois pontos
 public class DistanciaEntrePontos {
 
     public static void main(String[] args) {
@@ -26,7 +22,7 @@ public class DistanciaEntrePontos {
 
         double distancia = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 
-        System.out.printf("Distância entre (%.2f, %.2f) e (%.2f, %.2f): %.2f%n", x1, y1, x2, y2, distancia);
+        System.out.printf("Distância: %.2f%n", distancia);
 
         teclado.close();
     }

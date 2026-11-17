@@ -2,16 +2,7 @@ package questao11;
 
 import java.util.Scanner;
 
-/**
- * Questão 11 - Calcula o bônus anual de um funcionário de acordo com o cargo.
- *
- * Regras:
- * - Diretor: 4 salários + R$3000,00 por departamento gerenciado
- * - Gerente: 2 salários + R$100,00 por pessoa gerenciada
- * - Analista: 1 salário
- * - Programador: 0,8 salário
- * - Auxiliar de Limpeza: 0,5 salário
- */
+// Questão 11 - Bônus anual do funcionário
 public class BonusAnual {
 
     public static void main(String[] args) {
@@ -53,8 +44,6 @@ public class BonusAnual {
                 break;
             default:
                 System.out.println("Cargo inválido.");
-                teclado.close();
-                return;
         }
 
         System.out.printf("Bônus anual: R$ %.2f%n", bonus);
