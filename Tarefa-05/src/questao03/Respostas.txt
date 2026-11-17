@@ -1,0 +1,60 @@
+QUESTÃO 3 - Modificadores de acesso nos métodos da classe Ponto3D
+==================================================================
+
+Procedimento: os métodos da classe Ponto3D (getters, setters, mover, distancia
+e imprime) foram alterados para cada um dos modificadores public, protected e
+private. Para cada alteração, compilamos e executamos a classe TestePonto3D,
+que chama esses métodos a partir de OUTRA classe. O teste foi feito em dois
+cenários:
+  - TestePonto3D no MESMO pacote de Ponto3D (questao03);
+  - TestePonto3D em OUTRO pacote (outropacote), importando questao03.Ponto3D.
+
+Resultados
+----------
+
+| Modificador | Mesmo pacote                | Outro pacote                |
+|-------------|-----------------------------|-----------------------------|
+| public      | Compila e executa           | Compila e executa           |
+| protected   | Compila e executa           | ERRO DE COMPILAÇÃO          |
+| private     | ERRO DE COMPILAÇÃO          | ERRO DE COMPILAÇÃO          |
+
+Saída da execução (casos que compilaram):
+  p1 = (1.0, 2.0, 3.0)
+  p2 = (0.0, 0.0, 0.0)
+  p2 após mover(4, 6, 3) = (4.0, 6.0, 3.0)
+  x de p1 após setX(1.5) = 1.5
+  Distância entre p1 e p2 = 4,72
+
+Erros obtidos (trechos da saída do javac):
+
+  protected, outro pacote:
+    TestePonto3D.java:13: error: imprime() has protected access in Ponto3D
+    TestePonto3D.java:16: error: mover(double,double,double) has protected access in Ponto3D
+
+  private (nos dois cenários):
+    TestePonto3D.java:12: error: imprime() has private access in Ponto3D
+    TestePonto3D.java:15: error: mover(double,double,double) has private access in Ponto3D
+
+b) Em algum dos casos ocorreu erro de compilação ou execução? Quais e por quê?
+------------------------------------------------------------------------------
+
+Sim, ocorreram erros de COMPILAÇÃO (nenhum erro de execução, pois quando o
+código não compila nem chega a ser executado - o "java" reporta apenas que não
+encontrou a classe TestePonto3D, já que o .class não foi gerado).
+
+- public: o método pode ser acessado por qualquer classe, de qualquer pacote.
+  Por isso compilou e executou em todos os casos.
+
+- protected: o método pode ser acessado por classes do MESMO pacote e por
+  SUBCLASSES (mesmo que em outro pacote). Como TestePonto3D não é subclasse
+  de Ponto3D, ela só consegue chamar os métodos quando está no mesmo pacote.
+  Em outro pacote o compilador acusa "has protected access".
+
+- private: o método só pode ser acessado de dentro da própria classe Ponto3D.
+  Qualquer chamada vinda de outra classe (mesmo no mesmo pacote) gera o erro
+  "has private access". Só funcionaria se o main estivesse dentro da própria
+  classe Ponto3D.
+
+Conclusão: para que os métodos possam ser usados por outras classes, a versão
+final de Ponto3D (Ponto3D.java) mantém os métodos como public e deixa apenas os
+atributos x, y e z como private (encapsulamento).
