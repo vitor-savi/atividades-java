@@ -1,4 +1,4 @@
-package questao08;
+package tarefa01.questao08;
 
 import java.util.Scanner;
 
@@ -17,7 +17,7 @@ public class Nome {
 
         String[] partes = nomeCompleto.split("\\s+");
 
-        System.out.println("\nNome ao contrario:");
+        System.out.println("\nNome ao contrário:");
         for (int i = partes.length - 1; i >= 0; i--) {
             System.out.println(partes[i]);
         }
