@@ -7,7 +7,7 @@ public class Diretor extends Funcionario {
 
     public Diretor(String nome, double salario, Departamento[] departamentos)
             throws DepartamentosInsuficientesException {
-        super(nome, salario);
+        super(nome, "Diretor", salario);
         setDepartamentos(departamentos);
     }
 

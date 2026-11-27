@@ -6,7 +6,7 @@ public class Gerente extends Funcionario {
     private Funcionario[] equipe;
 
     public Gerente(String nome, double salario, Funcionario[] equipe) throws EquipeInsuficienteException {
-        super(nome, salario);
+        super(nome, "Gerente", salario);
         setEquipe(equipe);
     }
 
